@@ -1,0 +1,252 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Open sans;
+}
+:root {
+  --background-main-color: #f6e9e9;
+  --primary: #d23369;
+  --primary-deep: #ac043c;
+}
+body {
+  width: 100%;
+  background: rgb(17, 16, 16);
+  display: flex;
+  justify-content: center;
+}
+main {
+  width: 500px;
+  height: 99vh;
+  margin: 0 auto;
+  background-color: var(--background-main-color);
+}
+#root {
+  height: 100%;
+}
+
+/*Filter*/
+#search-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+#search-bar {
+  font-size: 15px;
+  padding: 10px;
+  padding-left: 15px;
+  width: 100%;
+  color: gray;
+  outline: 0;
+  border-radius: 20px;
+  border: 0.5px solid #e63b3b;
+  margin: 11px auto 5px;
+}
+
+/* Contact list Screen */
+#contact-list-screen {
+  padding: 30px 20px;
+  text-align: left;
+}
+h1 {
+  width: 100%;
+  font-size: 24px;
+  color: black;
+  margin-bottom: 0px;
+  background: #e63b3b;
+  color: white;
+  padding: 12px;
+}
+#list {
+  margin-bottom: 5px;
+}
+.contact {
+  font-size: 18px;
+  list-style-type: none;
+  margin-bottom: 10px;
+  color: white;
+  background: #ee4a4a;
+  padding: 20px;
+}
+.contact:hover {
+  cursor: pointer;
+  background: #df2626;
+}
+#new-contact-btn {
+  background: #df2626;
+  border: none;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 50px;
+  color: var(--background-main-color);
+  padding: 10px;
+  margin-left: 400px;
+}
+#new-contact-btn:hover {
+  cursor: pointer;
+}
+
+/* Contact Details Display */
+.box {
+  padding: 30px 20px;
+}
+.top-btns,
+#edit-screen-btns {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+.back-to-home-btn,
+.edit-btn {
+  background: black;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 50px;
+  width: 120px;
+  border: none;
+  color: white;
+}
+.back-to-home-btn:hover,
+.edit-btn:hover {
+  cursor: pointer;
+}
+.full-name {
+  font-size: 28px;
+  color: black;
+  margin-bottom: 10px;
+}
+.contact-label {
+  font-size: 15px;
+  color: black;
+  margin-bottom: 5px;
+}
+.label-content {
+  font-size: 20px;
+  color: black;
+  margin-bottom: 10px;
+}
+.phone-flex,
+.email-flex,
+.phone-flex-2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.phone-flex-2 {
+  width: 80px;
+}
+
+/* Add and edit contact form */
+#edit-screen,
+#contact-form-screen {
+  padding: 30px 20px;
+}
+label {
+  font-size: 16px;
+  color: black;
+}
+#firstname,
+#edit-firstname,
+#lastname,
+#edit-lastname,
+#edit-phonenumber,
+#phonenumber,
+#email,
+#edit-email {
+  width: 100%;
+  padding: 5px;
+  font-size: 18px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: solid grey 1px;
+}
+#update-btn,
+#save-contact-btn {
+  background: black;
+  border: none;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 50px;
+}
+#update-btn:hover,
+#save-contact-btn:hover {
+  cursor: pointer;
+}
+#cancel-btn {
+  margin-bottom: 30px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 50px;
+  background: #df2626;
+  border: none;
+  color: white;
+  padding: 10px;
+}
+#cancel-btn:hover {
+  cursor: pointer;
+}
+
+/* Edit Contact Section */
+#cancel-edit-btn {
+  font-size: 16px;
+  border-radius: 50px;
+  width: 120px;
+  background: #ee4a4a;
+  border: none;
+  color: white;
+  padding: 10px;
+}
+#cancel-edit-btn:hover {
+  cursor: pointer;
+}
+#delete-btn {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 50px;
+  width: 120px;
+  background: #e63b3b;
+  border: none;
+  color: white;
+}
+#delete-btn:hover {
+  cursor: pointer;
+}
+
+.email,
+.call,
+.message {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ac043c;
+  border: 0;
+  border-radius: 50px;
+  font-size: 17px;
+  color: wheat;
+}
+
+@media only screen and (max-width: 520px) {
+  main {
+    width: 400px;
+  }
+  #new-contact-btn {
+    margin-left: 300px;
+  }
+}
+@media only screen and (max-width: 450px) {
+  main {
+    width: 100vw;
+    margin: 0;
+    overflow-x: hidden;
+  }
+  #new-contact-btn {
+    margin-left: 265px;
+  }
+}
