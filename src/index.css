@@ -295,6 +295,7 @@ label {
   }
   #new-contact-btn {
     margin-left: 300px;
+    top: 75vh;
   }
 }
 @media only screen and (max-width: 450px) {
