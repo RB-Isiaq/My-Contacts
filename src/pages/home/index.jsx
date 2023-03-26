@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import {AiOutlineSearch} from 'react-icons/ai'
 import SingleContact from "../../components/singleContact";
 
 const Home = () => {
@@ -29,7 +30,8 @@ const Home = () => {
     navigate("new");
   }
 
-  function changeInputValue() {
+  function changeInputValue(e) {
+    e.preventDefault()
     // setSearchInput(e.target.value);
     let searchInputValue = searchValue.current.value
     let existingContactsList;
@@ -90,7 +92,7 @@ const Home = () => {
     <main>
       <div id="contact-list-screen">
         <h1>My Contacts</h1>
-        <form id="search-section">
+        <form id="search-section" onSubmit={changeInputValue}>
           <div>
             <input
             ref={searchValue}
@@ -102,6 +104,10 @@ const Home = () => {
               onChange={changeInputValue}
             />
           </div>
+          <button>
+          <AiOutlineSearch />
+          </button>
+          
         </form>
         <ul id="list">
           {contactLists.map((contact) => {
