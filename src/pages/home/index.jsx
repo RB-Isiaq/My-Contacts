@@ -1,13 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import {AiOutlineSearch} from 'react-icons/ai'
 import SingleContact from "../../components/singleContact";
 
 const Home = () => {
   const navigate = useNavigate();
   const searchValue = useRef();
   const [contactLists, setContactLists] = useState([]);
-  // const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [searchInputValue, setSearchInputValue] = useState(false);
 
   useEffect(() => {
     let existingContactsList;
@@ -24,7 +24,21 @@ const Home = () => {
       });
       setContactLists(existingContactsList);
     }
-  }, []);
+    if(searchInputValue) {
+        let searchedContacts = existingContactsList.filter(
+        (contact) =>
+          contact.firstName.toLowerCase().includes(searchInput) ||
+          contact.lastName.toLowerCase().includes(searchInput)
+      );
+      console.log(searchedContacts);
+      searchedContacts.sort((a, b) => {
+        if (a.firstName < b.firstName) return -1;
+        if (a.firstName > b.firstName) return 1;
+        return 0;
+      });
+      setContactLists(searchedContacts);
+    }
+  }, [searchInput, searchInputValue]);
 
   function addNewContact() {
     navigate("new");
@@ -32,32 +46,37 @@ const Home = () => {
 
   function changeInputValue(e) {
     e.preventDefault()
-    // setSearchInput(e.target.value);
-    let searchInputValue = searchValue.current.value
-    let existingContactsList;
-    existingContactsList = JSON.parse(localStorage.getItem("contacts"));
-    let searchedContacts = []
-    for (let i = 0; i < existingContactsList.length; i++) {
-      // if(existingContactsList[i].firstName.toLowerCase().includes(e.target.value) ||
-      // existingContactsList[i].lastName.toLowerCase().includes(e.target.value)) {
-      if(existingContactsList[i].firstName.toLowerCase().includes(searchInputValue) ||
-      existingContactsList[i].lastName.toLowerCase().includes(searchInputValue)) {
-        console.log(searchInputValue);
-        searchedContacts.push(existingContactsList[i])
-        console.log(searchedContacts);
-        console.log('FILTERED');
-        setContactLists(searchedContacts)
-      }
+    setSearchInput(e.target.value);
+    if(e.target.value === '') {
+      setSearchInputValue(false)
+    } else {
+      setSearchInputValue(true)
     }
-    if (searchInputValue === "") {
-      existingContactsList = JSON.parse(localStorage.getItem("contacts"));
-      existingContactsList.sort((a, b) => {
-        if (a.firstName < b.firstName) return -1;
-        if (a.firstName > b.firstName) return 1;
-        return 0;
-      });
-      setContactLists(existingContactsList);
-    } 
+    // let searchInputValue = searchValue.current.value
+    // let existingContactsList;
+    // existingContactsList = JSON.parse(localStorage.getItem("contacts"));
+    // let searchedContacts = []
+    // for (let i = 0; i < existingContactsList.length; i++) {
+    //   // if(existingContactsList[i].firstName.toLowerCase().includes(e.target.value) ||
+    //   // existingContactsList[i].lastName.toLowerCase().includes(e.target.value)) {
+    //   if(existingContactsList[i].firstName.toLowerCase().includes(searchInputValue) ||
+    //   existingContactsList[i].lastName.toLowerCase().includes(searchInputValue)) {
+    //     console.log(searchInputValue);
+    //     searchedContacts.push(existingContactsList[i])
+    //     console.log(searchedContacts);
+    //     console.log('FILTERED');
+    //     setContactLists(searchedContacts)
+    //   }
+    // }
+    // if (searchInputValue === "") {
+    //   existingContactsList = JSON.parse(localStorage.getItem("contacts"));
+    //   existingContactsList.sort((a, b) => {
+    //     if (a.firstName < b.firstName) return -1;
+    //     if (a.firstName > b.firstName) return 1;
+    //     return 0;
+    //   });
+    //   setContactLists(existingContactsList);
+    // } 
     // else {
     //   existingContactsList = JSON.parse(localStorage.getItem("contacts"));
     //   let searchedContacts = []
@@ -100,13 +119,10 @@ const Home = () => {
               id="search-bar"
               name="search"
               placeholder="Search contacts"
-              // value={searchInput}
+              value={searchInput}
               onChange={changeInputValue}
             />
           </div>
-          <button>
-          <AiOutlineSearch />
-          </button>
           
         </form>
         <ul id="list">
