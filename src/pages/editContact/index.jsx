@@ -35,7 +35,6 @@ const EditContact = () => {
         );
         if (proceed) {
           existingContactsList.splice(index, 1);
-          console.log(existingContactsList);
           localStorage.setItem(
             "contacts",
             JSON.stringify(existingContactsList)
@@ -89,7 +88,7 @@ const EditContact = () => {
         </div>
         <form id="edit-form" method="post" onSubmit={submitHandler}>
           <div>
-            <label htmlFor="edit-firstname">First Name:</label>
+            <label htmlFor="edit-firstname">First Name</label>
             <br />
             <input
               ref={firstName}
@@ -100,7 +99,7 @@ const EditContact = () => {
             />
           </div>
           <div>
-            <label htmlFor="edit-lastname">Last Name:</label>
+            <label htmlFor="edit-lastname">Last Name</label>
             <br />
             <input
               ref={lastName}
@@ -111,7 +110,7 @@ const EditContact = () => {
             />
           </div>
           <div>
-            <label htmlFor="edit-email">Email:</label>
+            <label htmlFor="edit-email">Email</label>
             <br />
             <input
               ref={email}
@@ -122,7 +121,7 @@ const EditContact = () => {
             />
           </div>
           <div>
-            <label htmlFor="edit-phonenumber">Phone:</label>
+            <label htmlFor="edit-phonenumber">Phone</label>
             <br />
             <input
               ref={phonenumber}

@@ -33,7 +33,6 @@ function NewContact() {
     }
 
     navigate("/");
-    console.log(localStorage.getItem("contact"));
   }
 
   function cancelHandler() {
@@ -49,7 +48,7 @@ function NewContact() {
         </div>
         <form id="contact-form" onSubmit={submitHandler}>
           <div>
-            <label htmlFor="firstname">First Name:</label>
+            <label htmlFor="firstname">First Name</label>
             <br />
             <input
               ref={firstName}
@@ -57,22 +56,41 @@ function NewContact() {
               type="text"
               id="firstname"
               name="firstname"
+              placeholder="First name"
             />
           </div>
           <div>
-            <label htmlFor="lastname">Last Name:</label>
+            <label htmlFor="lastname">Last Name</label>
             <br />
-            <input ref={lastName} type="text" id="lastname" name="lastname" />
+            <input
+              ref={lastName}
+              type="text"
+              id="lastname"
+              name="lastname"
+              placeholder="Last name"
+            />
           </div>
           <div>
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">Email</label>
             <br />
-            <input ref={email} type="email" id="email" name="mail" />
+            <input
+              ref={email}
+              type="email"
+              id="email"
+              name="mail"
+              placeholder="Email"
+            />
           </div>
           <div>
-            <label htmlFor="phonenumber">Phone:</label>
+            <label htmlFor="phonenumber">Phone</label>
             <br />
-            <input ref={phonenumber} type="tel" id="phonenumber" name="phone" />
+            <input
+              ref={phonenumber}
+              type="tel"
+              id="phonenumber"
+              name="phone"
+              placeholder="Phone"
+            />
           </div>
           <div>
             <input type="submit" id="save-contact-btn" value="Save" />

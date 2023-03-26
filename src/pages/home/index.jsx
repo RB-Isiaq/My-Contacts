@@ -20,7 +20,6 @@ const Home = () => {
         if (a.firstName > b.firstName) return 1;
         return 0;
       });
-      console.log(existingContactsList);
       setContactLists(existingContactsList);
     }
   }, []);
@@ -38,7 +37,7 @@ const Home = () => {
           contact.firstName.toLowerCase().includes(e.target.value) ||
           contact.lastName.toLowerCase().includes(e.target.value)
       );
-      existingContactsList.sort((a, b) => {
+      searchedContacts.sort((a, b) => {
         if (a.firstName < b.firstName) return -1;
         if (a.firstName > b.firstName) return 1;
         return 0;

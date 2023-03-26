@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { AiOutlinePhone } from "react-icons/ai";
+import { AiOutlinePhone, AiOutlineWhatsApp } from "react-icons/ai";
 import { AiOutlineMail } from "react-icons/ai";
 import { AiOutlineMessage } from "react-icons/ai";
 
@@ -17,7 +17,6 @@ function ContactDetails() {
   const lastName = identifiedContact[0].lastName;
   const email = identifiedContact[0].email;
   const phonenumber = identifiedContact[0].phonenumber;
-  // setContact(dentifiedContact);
 
   function goBackHandler() {
     navigate("..");
@@ -29,11 +28,14 @@ function ContactDetails() {
   function sendEmail() {
     window.open(`mailto:${email}`);
   }
+  function callPhoneNumber() {
+    window.open(`tel:${phonenumber}`);
+  }
   function sendMessage() {
     window.open(`sms:${phonenumber}`);
   }
-  function callPhoneNumber() {
-    window.open(`tel:${phonenumber}`);
+  function openWhatsapp() {
+    window.open(`https://wa.me/${phonenumber}`);
   }
   return (
     <div id="details">
@@ -55,7 +57,7 @@ function ContactDetails() {
         <p className="full-name">
           {firstName} {lastName}
         </p>
-        <p className="contact-label">Email:</p>
+        <p className="contact-label">Email</p>
         <div className="email-flex">
           <p className="label-content">{email}</p>
           <div>
@@ -64,7 +66,7 @@ function ContactDetails() {
             </button>
           </div>
         </div>
-        <p className="contact-label">Phone:</p>
+        <p className="contact-label">Phone</p>
         <div className="phone-flex">
           <p className="label-content">{phonenumber}</p>
           <div className="phone-flex-2">
@@ -76,6 +78,11 @@ function ContactDetails() {
             <div>
               <button className="message" onClick={sendMessage}>
                 <AiOutlineMessage />
+              </button>
+            </div>
+            <div>
+              <button className="message" onClick={openWhatsapp}>
+                <AiOutlineWhatsApp />
               </button>
             </div>
           </div>

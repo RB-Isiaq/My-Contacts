@@ -17,12 +17,6 @@ const router = createBrowserRouter([
         path: ":contactId",
         id: "contactId",
         element: <ContactDetails />,
-        // children: [
-        //   {
-        //     path: "edit",
-        //     element: <EditContact />,
-        //   },
-        // ]
       },
 
       { path: "new", element: <NewContact /> },

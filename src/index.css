@@ -6,31 +6,44 @@
 }
 :root {
   --background-main-color: #f6e9e9;
-  --primary: #d23369;
-  --primary-deep: #ac043c;
 }
 body {
   width: 100%;
-  background: rgb(17, 16, 16);
+  background: var(--background-main-color);
   display: flex;
   justify-content: center;
 }
 main {
   width: 500px;
-  height: 99vh;
+  height: 100vh;
   margin: 0 auto;
-  background-color: var(--background-main-color);
+  background: var(--background-main-color);
 }
 #root {
   height: 100%;
 }
-
+/* Contact list Screen */
+#contact-list-screen {
+  position: relative;
+  width: 500px;
+  margin: 0 auto;
+  padding: 30px 0;
+  text-align: left;
+  background: var(--background-main-color);
+}
 /*Filter*/
 #search-section {
+  position: fixed;
+  width: inherit;
+  top: 57px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  left: 0;
   display: flex;
   justify-content: center;
   width: 100%;
   margin-bottom: 20px;
+  background: var(--background-main-color);
 }
 #search-bar {
   font-size: 15px;
@@ -41,48 +54,66 @@ main {
   outline: 0;
   border-radius: 20px;
   border: 0.5px solid #e63b3b;
-  margin: 11px auto 5px;
 }
 
-/* Contact list Screen */
-#contact-list-screen {
-  padding: 30px 20px;
-  text-align: left;
-}
 h1 {
-  width: 100%;
+  position: fixed;
+  top: 0;
+  width: inherit;
   font-size: 24px;
+  font-weight: 600px;
   color: black;
-  margin-bottom: 0px;
   background: #e63b3b;
   color: white;
   padding: 12px;
+  padding-left: 15px;
 }
 #list {
+  margin-top: 115px;
   margin-bottom: 5px;
 }
 .contact {
+  display: flex;
+  align-items: center;
   font-size: 18px;
   list-style-type: none;
   margin-bottom: 10px;
   color: white;
   background: #ee4a4a;
-  padding: 20px;
+  padding: 10px;
+}
+.contact span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  margin-right: 10px;
+  border: 2px solid var(--background-main-color);
+  background: var(--background-main-color);
+  color: #ee4a4a;
 }
 .contact:hover {
   cursor: pointer;
   background: #df2626;
 }
 #new-contact-btn {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #df2626;
   border: none;
-  width: 50px;
-  height: 50px;
-  font-size: 18px;
+  width: 55px;
+  height: 55px;
+  top: 70vh;
+  font-size: 25px;
   border-radius: 50px;
   color: var(--background-main-color);
-  padding: 10px;
-  margin-left: 400px;
+  margin-left: 440px;
+  box-shadow: 1px 5px 12px #df2626;
 }
 #new-contact-btn:hover {
   cursor: pointer;
@@ -116,16 +147,19 @@ h1 {
   font-size: 28px;
   color: black;
   margin-bottom: 10px;
+  font-weight: 500;
 }
 .contact-label {
   font-size: 15px;
   color: black;
   margin-bottom: 5px;
+  font-weight: 300;
 }
 .label-content {
   font-size: 20px;
   color: black;
   margin-bottom: 10px;
+  font-weight: 400;
 }
 .phone-flex,
 .email-flex,
@@ -135,7 +169,7 @@ h1 {
   justify-content: space-between;
 }
 .phone-flex-2 {
-  width: 80px;
+  width: 130px;
 }
 
 /* Add and edit contact form */
@@ -156,12 +190,24 @@ label {
 #email,
 #edit-email {
   width: 100%;
+  background: inherit;
   padding: 5px;
   font-size: 18px;
   margin-top: 5px;
   margin-bottom: 20px;
+  outline: 0;
   border: none;
   border-bottom: solid grey 1px;
+}
+#firstname:focus,
+#edit-firstname:focus,
+#lastname:focus,
+#edit-lastname:focus,
+#edit-phonenumber:focus,
+#phonenumber:focus,
+#email:focus,
+#edit-email:focus {
+  border-bottom: solid #e63b3b 1px;
 }
 #update-btn,
 #save-contact-btn {
@@ -225,27 +271,46 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #ac043c;
-  border: 0;
+  background: var(--background-main-color);
+  border: 1px solid #e63b3b;
   border-radius: 50px;
   font-size: 17px;
-  color: wheat;
+  color: #e63b3b;
+}
+.email:hover,
+.call:hover,
+.message:hover {
+  color: var(--background-main-color);
+  border: 1px solid #e63b3b;
+  background: #e63b3b;
 }
 
 @media only screen and (max-width: 520px) {
   main {
     width: 400px;
   }
+  #contact-list-screen {
+    width: 400px;
+  }
   #new-contact-btn {
     margin-left: 300px;
+    top: 85vh;
   }
 }
 @media only screen and (max-width: 450px) {
   main {
-    width: 100vw;
-    margin: 0;
+    width: 340px;
     overflow-x: hidden;
   }
+  #contact-list-screen {
+    width: 340px;
+  }
+  .label-content {
+    font-size: 18px;
+    line-break: anywhere;
+  }
+}
+@media only screen and (max-width: 400px) {
   #new-contact-btn {
     margin-left: 265px;
   }

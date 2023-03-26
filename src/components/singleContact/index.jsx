@@ -4,7 +4,6 @@ function SingleContact({ id, letter, firstName, lastName }) {
   const navigate = useNavigate();
 
   function showContactDetailsHandler() {
-    // navigate(`/${id}`);
     navigate(id);
   }
 
@@ -14,7 +13,7 @@ function SingleContact({ id, letter, firstName, lastName }) {
       id={`contact-${id}`}
       onClick={showContactDetailsHandler}
     >
-      {letter} | {firstName} {lastName}
+      <span>{letter} </span> {firstName} {lastName}
     </li>
   );
 }
