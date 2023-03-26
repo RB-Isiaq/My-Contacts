@@ -64,7 +64,7 @@ const Home = () => {
         <form id="search-section" onSubmit={searchHandler}>
           <div>
             <input
-              type="text"
+              type="search"
               id="search-bar"
               name="search"
               placeholder="Search contacts"
