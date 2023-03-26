@@ -41,19 +41,19 @@ const Home = () => {
       setContactLists(existingContactsList);
     } else {
       existingContactsList = JSON.parse(localStorage.getItem("contacts"));
-      let searchedContacts = existingContactsList.filter(
+      existingContactsList = existingContactsList.filter(
         (contact) =>
           contact.firstName.toLowerCase().includes(e.target.value) ||
           contact.lastName.toLowerCase().includes(e.target.value)
       );
       console.log(e.target.value);
-      console.log(searchedContacts);
-      searchedContacts.sort((a, b) => {
+      console.log(existingContactsList);
+      existingContactsList.sort((a, b) => {
         if (a.firstName < b.firstName) return -1;
         if (a.firstName > b.firstName) return 1;
         return 0;
       });
-      setContactLists(searchedContacts);
+      setContactLists(existingContactsList);
     }
   }
 
