@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SingleContact from "../../components/singleContact";
 
@@ -6,7 +6,6 @@ const Home = () => {
   const navigate = useNavigate();
   const [contactLists, setContactLists] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const searchValue = useRef();
 
   useEffect(() => {
     let existingContactsList;
@@ -31,27 +30,16 @@ const Home = () => {
 
   function changeInputValue(e) {
     setSearchInput(e.target.value);
-    let searchParameter = searchValue.current.value;
     let existingContactsList = JSON.parse(localStorage.getItem("contacts"));
-    if (searchParameter !== "") {
-      // const searchedContacts = existingContactsList.filter(
-      //   (contact) =>
-      //     contact.firstName.toLowerCase().includes(e.target.value) ||
-      //     contact.lastName.toLowerCase().includes(e.target.value)
-      // );
-      // searchedContacts.sort((a, b) => {
-      //   if (a.firstName < b.firstName) return -1;
-      //   if (a.firstName > b.firstName) return 1;
-      //   return 0;
-      // });
-      // setContactLists(searchedContacts);
-      setContactLists(
-        existingContactsList.filter(
-          (contact) =>
-            contact.firstName.toLowerCase() === { searchParameter } ||
-            contact.lastName.toLowerCase() === { searchParameter }
-        )
+    if (e.target.value !== "") {
+      let searchedContacts = existingContactsList.filter(
+        (contact) =>
+          contact.firstName.toLowerCase().includes(e.target.value) ||
+          contact.lastName.toLowerCase().includes(e.target.value)
       );
+      console.log(e.target.value);
+      console.log(searchedContacts);
+      setContactLists(searchedContacts);
     } else {
       existingContactsList = JSON.parse(localStorage.getItem("contacts"));
       existingContactsList.sort((a, b) => {
@@ -73,11 +61,11 @@ const Home = () => {
         <form id="search-section" onSubmit={searchHandler}>
           <div>
             <input
-              ref={searchValue}
               type="search"
               id="search-bar"
               name="search"
               placeholder="Search contacts"
+              value={searchInput}
               onChange={changeInputValue}
             />
           </div>
