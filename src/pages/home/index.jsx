@@ -47,6 +47,7 @@ const Home = () => {
         existingContactsList[i].lastName.toLowerCase().includes(e.target.value)) {
           searchedContacts.push(existingContactsList[i])
           console.log(searchedContacts);
+          console.log('FILTERED');
           setContactLists(searchedContacts)
         }
       }
@@ -67,14 +68,12 @@ const Home = () => {
     }
   }
 
-  function searchHandler(e) {
-    e.preventDefault();
-  }
+ 
   return (
     <main>
       <div id="contact-list-screen">
         <h1>My Contacts</h1>
-        <form id="search-section" onSubmit={searchHandler}>
+        <form id="search-section">
           <div>
             <input
               type="search"
