@@ -31,7 +31,7 @@ const Home = () => {
   function changeInputValue(e) {
     setSearchInput(e.target.value);
     let existingContactsList = JSON.parse(localStorage.getItem("contacts"));
-    if (e.target.value !== "") {
+    if (e.target.value !== "" || e.target.value !== null || e.target.value !== undefined) {
       let searchedContacts = existingContactsList.filter(
         (contact) =>
           contact.firstName.toLowerCase().includes(e.target.value) ||
