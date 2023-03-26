@@ -46,8 +46,8 @@ const Home = () => {
       setContactLists(
         existingContactsList.filter(
           (contact) =>
-            contact.firstName.toLowerCase().includes(e.target.value) ||
-            contact.lastName.toLowerCase().includes(e.target.value)
+            contact.firstName.toLowerCase() === e.target.value ||
+            contact.lastName.toLowerCase() === e.target.value
         )
       );
     } else {
