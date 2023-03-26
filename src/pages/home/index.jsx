@@ -30,6 +30,7 @@ const Home = () => {
           contact.firstName.toLowerCase().includes(searchInput) ||
           contact.lastName.toLowerCase().includes(searchInput)
       );
+      console.log(searchInput);
       console.log(searchedContacts);
       searchedContacts.sort((a, b) => {
         if (a.firstName < b.firstName) return -1;
