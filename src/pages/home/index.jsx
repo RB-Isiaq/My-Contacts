@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import SingleContact from "../../components/singleContact";
 
@@ -6,6 +6,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [contactLists, setContactLists] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const searchValue = useRef();
 
   useEffect(() => {
     let existingContactsList;
@@ -30,8 +31,9 @@ const Home = () => {
 
   function changeInputValue(e) {
     setSearchInput(e.target.value);
+    let searchParameter = searchValue.current.value;
     let existingContactsList = JSON.parse(localStorage.getItem("contacts"));
-    if (e.target.value !== "") {
+    if (searchParameter !== "") {
       // const searchedContacts = existingContactsList.filter(
       //   (contact) =>
       //     contact.firstName.toLowerCase().includes(e.target.value) ||
@@ -46,8 +48,8 @@ const Home = () => {
       setContactLists(
         existingContactsList.filter(
           (contact) =>
-            contact.firstName.toLowerCase() === { searchInput } ||
-            contact.lastName.toLowerCase() === { searchInput }
+            contact.firstName.toLowerCase() === { searchParameter } ||
+            contact.lastName.toLowerCase() === { searchParameter }
         )
       );
     } else {
@@ -71,11 +73,11 @@ const Home = () => {
         <form id="search-section" onSubmit={searchHandler}>
           <div>
             <input
+              ref={searchValue}
               type="search"
               id="search-bar"
               name="search"
               placeholder="Search contacts"
-              value={searchInput}
               onChange={changeInputValue}
             />
           </div>
