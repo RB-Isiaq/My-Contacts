@@ -30,17 +30,8 @@ const Home = () => {
 
   function changeInputValue(e) {
     setSearchInput(e.target.value);
-    let existingContactsList = JSON.parse(localStorage.getItem("contacts"));
-    if (searchInput !== "") {
-      let searchedContacts = existingContactsList.filter(
-        (contact) =>
-          contact.firstName.toLowerCase().includes(e.target.value) ||
-          contact.lastName.toLowerCase().includes(e.target.value)
-      );
-      console.log(e.target.value);
-      console.log(searchedContacts);
-      setContactLists(searchedContacts);
-    } else {
+    let existingContactsList;
+    if (e.target.value === "") {
       existingContactsList = JSON.parse(localStorage.getItem("contacts"));
       existingContactsList.sort((a, b) => {
         if (a.firstName < b.firstName) return -1;
@@ -48,6 +39,21 @@ const Home = () => {
         return 0;
       });
       setContactLists(existingContactsList);
+    } else {
+      existingContactsList = JSON.parse(localStorage.getItem("contacts"));
+      let searchedContacts = existingContactsList.filter(
+        (contact) =>
+          contact.firstName.toLowerCase().includes(e.target.value) ||
+          contact.lastName.toLowerCase().includes(e.target.value)
+      );
+      console.log(e.target.value);
+      console.log(searchedContacts);
+      searchedContacts.sort((a, b) => {
+        if (a.firstName < b.firstName) return -1;
+        if (a.firstName > b.firstName) return 1;
+        return 0;
+      });
+      setContactLists(searchedContacts);
     }
   }
 
