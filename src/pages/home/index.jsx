@@ -1,13 +1,11 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SingleContact from "../../components/singleContact";
 
 const Home = () => {
   const navigate = useNavigate();
-  const searchValue = useRef();
   const [contactLists, setContactLists] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [searchInputValue, setSearchInputValue] = useState(false);
 
   useEffect(() => {
     let existingContactsList;
@@ -24,14 +22,30 @@ const Home = () => {
       });
       setContactLists(existingContactsList);
     }
-    if(searchInputValue) {
-        let searchedContacts = existingContactsList.filter(
+  }, []);
+
+  function addNewContact() {
+    navigate("new");
+  }
+
+  function changeInputValue(e) {
+    setSearchInput(e.target.value);
+    let existingContactsList;
+    if (e.target.value === "") {
+      existingContactsList = JSON.parse(localStorage.getItem("contacts"));
+      existingContactsList.sort((a, b) => {
+        if (a.firstName < b.firstName) return -1;
+        if (a.firstName > b.firstName) return 1;
+        return 0;
+      });
+      setContactLists(existingContactsList);
+    } else {
+      existingContactsList = JSON.parse(localStorage.getItem("contacts"));
+      let searchedContacts = existingContactsList.filter(
         (contact) =>
-          contact.firstName.toLowerCase()===(searchInput) ||
-          contact.lastName.toLowerCase()===(searchInput)
+          contact.firstName.toLowerCase().includes(e.target.value.toLowerCase()) ||
+          contact.lastName.toLowerCase().includes(e.target.value.toLowerCase())
       );
-      console.log(searchInput);
-      console.log(searchedContacts);
       searchedContacts.sort((a, b) => {
         if (a.firstName < b.firstName) return -1;
         if (a.firstName > b.firstName) return 1;
@@ -39,83 +53,18 @@ const Home = () => {
       });
       setContactLists(searchedContacts);
     }
-  }, [searchInput, searchInputValue]);
-
-  function addNewContact() {
-    navigate("new");
   }
 
-  function changeInputValue(e) {
-    e.preventDefault()
-    setSearchInput(e.target.value);
-    if(e.target.value === '') {
-      setSearchInputValue(false)
-    } else {
-      setSearchInputValue(true)
-    }
-    // let searchInputValue = searchValue.current.value
-    // let existingContactsList;
-    // existingContactsList = JSON.parse(localStorage.getItem("contacts"));
-    // let searchedContacts = []
-    // for (let i = 0; i < existingContactsList.length; i++) {
-    //   // if(existingContactsList[i].firstName.toLowerCase().includes(e.target.value) ||
-    //   // existingContactsList[i].lastName.toLowerCase().includes(e.target.value)) {
-    //   if(existingContactsList[i].firstName.toLowerCase().includes(searchInputValue) ||
-    //   existingContactsList[i].lastName.toLowerCase().includes(searchInputValue)) {
-    //     console.log(searchInputValue);
-    //     searchedContacts.push(existingContactsList[i])
-    //     console.log(searchedContacts);
-    //     console.log('FILTERED');
-    //     setContactLists(searchedContacts)
-    //   }
-    // }
-    // if (searchInputValue === "") {
-    //   existingContactsList = JSON.parse(localStorage.getItem("contacts"));
-    //   existingContactsList.sort((a, b) => {
-    //     if (a.firstName < b.firstName) return -1;
-    //     if (a.firstName > b.firstName) return 1;
-    //     return 0;
-    //   });
-    //   setContactLists(existingContactsList);
-    // } 
-    // else {
-    //   existingContactsList = JSON.parse(localStorage.getItem("contacts"));
-    //   let searchedContacts = []
-    //   for (let i = 0; i < existingContactsList.length; i++) {
-    //     if(existingContactsList[i].firstName.toLowerCase().includes(e.target.value) ||
-    //     existingContactsList[i].lastName.toLowerCase().includes(e.target.value)) {
-    //       searchedContacts.push(existingContactsList[i])
-    //       console.log(searchedContacts);
-    //       console.log('FILTERED');
-    //       setContactLists(searchedContacts)
-    //     }
-    //   }
-    //   // USING FILTER METHOD
-    //   // let searchedContacts = existingContactsList.filter(
-    //   //   (contact) =>
-    //   //     contact.firstName.toLowerCase().includes(e.target.value) ||
-    //   //     contact.lastName.toLowerCase().includes(e.target.value)
-    //   // );
-    //   // console.log(e.target.value);
-    //   // console.log(searchedContacts);
-    //   // searchedContacts.sort((a, b) => {
-    //   //   if (a.firstName < b.firstName) return -1;
-    //   //   if (a.firstName > b.firstName) return 1;
-    //   //   return 0;
-    //   // });
-    //   // setContactLists(searchedContacts);
-    // }
+  function searchHandler(e) {
+    e.preventDefault();
   }
-
- 
   return (
     <main>
       <div id="contact-list-screen">
         <h1>My Contacts</h1>
-        <form id="search-section" onSubmit={changeInputValue}>
+        <form id="search-section" onSubmit={searchHandler}>
           <div>
             <input
-            ref={searchValue}
               type="search"
               id="search-bar"
               name="search"
@@ -124,7 +73,6 @@ const Home = () => {
               onChange={changeInputValue}
             />
           </div>
-          
         </form>
         <ul id="list">
           {contactLists.map((contact) => {
