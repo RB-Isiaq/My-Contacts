@@ -27,7 +27,8 @@ const Home = () => {
     if(searchInputValue) {
         let searchedContacts = existingContactsList.filter(
         (contact) =>
-          {return contact.firstName.toLowerCase().includes(searchInput)}
+          contact.firstName.toLowerCase()===(searchInput) ||
+          contact.lastName.toLowerCase()===(searchInput)
       );
       console.log(searchInput);
       console.log(searchedContacts);
