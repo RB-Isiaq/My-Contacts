@@ -31,18 +31,25 @@ const Home = () => {
   function changeInputValue(e) {
     setSearchInput(e.target.value);
     let existingContactsList = JSON.parse(localStorage.getItem("contacts"));
-    if (e.target.value.trim().length > 1) {
-      const searchedContacts = existingContactsList.filter(
-        (contact) =>
-          contact.firstName.toLowerCase().includes(e.target.value) ||
-          contact.lastName.toLowerCase().includes(e.target.value)
+    if (e.target.value !== "") {
+      // const searchedContacts = existingContactsList.filter(
+      //   (contact) =>
+      //     contact.firstName.toLowerCase().includes(e.target.value) ||
+      //     contact.lastName.toLowerCase().includes(e.target.value)
+      // );
+      // searchedContacts.sort((a, b) => {
+      //   if (a.firstName < b.firstName) return -1;
+      //   if (a.firstName > b.firstName) return 1;
+      //   return 0;
+      // });
+      // setContactLists(searchedContacts);
+      setContactLists(
+        existingContactsList.filter(
+          (contact) =>
+            contact.firstName.toLowerCase().includes(e.target.value) ||
+            contact.lastName.toLowerCase().includes(e.target.value)
+        )
       );
-      searchedContacts.sort((a, b) => {
-        if (a.firstName < b.firstName) return -1;
-        if (a.firstName > b.firstName) return 1;
-        return 0;
-      });
-      setContactLists(searchedContacts);
     } else {
       existingContactsList = JSON.parse(localStorage.getItem("contacts"));
       existingContactsList.sort((a, b) => {
