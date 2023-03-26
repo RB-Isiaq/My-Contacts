@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import SingleContact from "../../components/singleContact";
 
 const Home = () => {
   const navigate = useNavigate();
+  const searchValue = useRef();
   const [contactLists, setContactLists] = useState([]);
-  const [searchInput, setSearchInput] = useState("");
+  // const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     let existingContactsList;
@@ -28,22 +29,25 @@ const Home = () => {
     navigate("new");
   }
 
-  function changeInputValue(e) {
-    setSearchInput(e.target.value);
+  function changeInputValue() {
+    // setSearchInput(e.target.value);
+    let searchInputValue = searchValue.current.value
     let existingContactsList;
     existingContactsList = JSON.parse(localStorage.getItem("contacts"));
     let searchedContacts = []
     for (let i = 0; i < existingContactsList.length; i++) {
-      if(existingContactsList[i].firstName.toLowerCase().includes(e.target.value) ||
-      existingContactsList[i].lastName.toLowerCase().includes(e.target.value)) {
-        console.log(e.target.value);
+      // if(existingContactsList[i].firstName.toLowerCase().includes(e.target.value) ||
+      // existingContactsList[i].lastName.toLowerCase().includes(e.target.value)) {
+      if(existingContactsList[i].firstName.toLowerCase().includes(searchInputValue) ||
+      existingContactsList[i].lastName.toLowerCase().includes(searchInputValue)) {
+        console.log(searchInputValue);
         searchedContacts.push(existingContactsList[i])
         console.log(searchedContacts);
         console.log('FILTERED');
         setContactLists(searchedContacts)
       }
     }
-    if (e.target.value === "") {
+    if (searchInputValue === "") {
       existingContactsList = JSON.parse(localStorage.getItem("contacts"));
       existingContactsList.sort((a, b) => {
         if (a.firstName < b.firstName) return -1;
@@ -89,11 +93,12 @@ const Home = () => {
         <form id="search-section">
           <div>
             <input
+            ref={searchValue}
               type="search"
               id="search-bar"
               name="search"
               placeholder="Search contacts"
-              value={searchInput}
+              // value={searchInput}
               onChange={changeInputValue}
             />
           </div>
