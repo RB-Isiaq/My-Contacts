@@ -41,19 +41,29 @@ const Home = () => {
       setContactLists(existingContactsList);
     } else {
       existingContactsList = JSON.parse(localStorage.getItem("contacts"));
-      existingContactsList = existingContactsList.filter(
-        (contact) =>
-          contact.firstName.toLowerCase().includes(e.target.value) ||
-          contact.lastName.toLowerCase().includes(e.target.value)
-      );
-      console.log(e.target.value);
-      console.log(existingContactsList);
-      existingContactsList.sort((a, b) => {
-        if (a.firstName < b.firstName) return -1;
-        if (a.firstName > b.firstName) return 1;
-        return 0;
-      });
-      setContactLists(existingContactsList);
+      let searchedContacts = []
+      for (let i = 0; i < existingContactsList.length; i++) {
+        if(existingContactsList[i].firstName.toLowerCase().includes(e.target.value) ||
+        existingContactsList[i].lastName.toLowerCase().includes(e.target.value)) {
+          searchedContacts.push(existingContactsList[i])
+          console.log(searchedContacts);
+          setContactLists(searchedContacts)
+        }
+      }
+      // USING FILTER METHOD
+      // let searchedContacts = existingContactsList.filter(
+      //   (contact) =>
+      //     contact.firstName.toLowerCase().includes(e.target.value) ||
+      //     contact.lastName.toLowerCase().includes(e.target.value)
+      // );
+      // console.log(e.target.value);
+      // console.log(searchedContacts);
+      // searchedContacts.sort((a, b) => {
+      //   if (a.firstName < b.firstName) return -1;
+      //   if (a.firstName > b.firstName) return 1;
+      //   return 0;
+      // });
+      // setContactLists(searchedContacts);
     }
   }
 
