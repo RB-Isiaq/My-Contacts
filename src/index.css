@@ -35,7 +35,7 @@ main {
 #search-section {
   position: fixed;
   width: inherit;
-  top: 75px;
+  top: 73px;
   padding-top: 20px;
   padding-bottom: 10px;
   left: 0;
@@ -70,7 +70,7 @@ h1 {
   margin-top: 20px;
 }
 #list {
-  margin-top: 125px;
+  margin-top: 123px;
   margin-bottom: 5px;
 }
 .contact {
